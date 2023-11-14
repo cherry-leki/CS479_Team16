@@ -212,7 +212,7 @@ def main():
         
         npypath = str(output_dir / f"null_inv.npy")
         with open(npypath.replace("null_inv.npy", "text_prompt.txt"), "w") as text_file:
-            text_file.write(test_text_data)
+            text_file.write(str(test_motion_len) + " " + test_text_data)
         np.save(npypath, null_inv_joints[0].detach().cpu().numpy())
         
         logger.info(f"Motions are generated here:\n{output_dir}")
