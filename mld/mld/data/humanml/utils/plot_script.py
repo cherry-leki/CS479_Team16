@@ -93,8 +93,8 @@ def plot_3d_motion(save_path, joints, title, figsize=(3, 3), fps=120, radius=3, 
         #         print(index)
         # print(ax.lines)
         # exit()
-        # ax.lines = []
-        # ax.collections = []
+        ax.lines = []
+        ax.collections = []
         ax.view_init(elev=120, azim=-90)
         ax.dist = 7.5
         #         ax =
