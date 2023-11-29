@@ -12,6 +12,7 @@ denoiser:
     return_intermediate_dec: False
     position_embedding: 'learned'
     arch: trans_enc
+    # arch: trans_dec
     freq_shift: 0
     condition: ${model.condition}
     latent_dim: ${model.latent_dim}

@@ -124,6 +124,6 @@ RENDER:
   GT: false
 DEMO:
   MOTION_TRANSFER: false
-  RENDER: false
+  RENDER: true
   FRAME_RATE: 12.5
   EXAMPLE: null

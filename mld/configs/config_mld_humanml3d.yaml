@@ -3,8 +3,8 @@
 ####################################
 
 # Experiment name, more details in Section 'Experiment Name Explanation'
-# NAME: 1222_PELearn_Diff_Latent1_MEncDec49_MdiffEnc49_bs64_clip_uncond75_01
-NAME: CL_Inversion_Test
+#NAME: 1222_PELearn_Diff_Latent1_MEncDec49_MdiffEnc49_bs64_clip_uncond75_01
+NAME: CL_Test_Control
 # Debug mode. Set to True will enter the debug mode, then the program will
 # 1. use a tiny dataset for trianing and evaluation
 # 2. validate more intensively
@@ -54,6 +54,7 @@ EVAL:
 #####################################
 TEST:
   CHECKPOINTS: ./checkpoints/mld_humanml3d_checkpoint/1222_mld_humanml3d_FID041.ckpt # Pretrained model path
+  # CHECKPOINTS: ./checkpoints/cs479/1123_MEncDec49_MdiffDec49_bs64_clip_uncond75_01/epoch=1999.ckpt
   DATASETS: ['humanml3d'] # training datasets
   SPLIT: test
   BATCH_SIZE: 1 # training Batch size
