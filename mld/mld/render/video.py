@@ -38,7 +38,7 @@ class Video:
                   for x in sorted(os.listdir(frame_path))]
 
         # mask background white for videos
-        mask_png(frames)
+        # mask_png(frames)
 
         video = mp.ImageSequenceClip(frames, fps=fps)
         self.video = video

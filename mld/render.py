@@ -145,7 +145,7 @@ def render_cli() -> None:
 
             vid_path = frames_folder.replace("_frames", ".mp4")
             video.save(out_path=vid_path)
-            shutil.rmtree(frames_folder)
+            # shutil.rmtree(frames_folder)
             print(f"remove tmp fig folder and save video in {vid_path}")
 
         else:

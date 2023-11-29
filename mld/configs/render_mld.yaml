@@ -15,7 +15,7 @@ RENDER:
   FPS: 20.0
   CANONICALIZE: True
   EXACT_FRAME: 0.5
-  NUM: 8
+  NUM: 6
   MODE: '___no_need__' #sequence frame video
   VID_EXT: 'mp4'
   FACES_PATH: './deps/smpl_models/smplh/smplh.faces'
