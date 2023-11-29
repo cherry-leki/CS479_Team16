@@ -179,7 +179,7 @@ def main():
                     joints = model.forward_motion_style_transfer(batch)
                 # text to motion synthesis
                 else:
-                    joints = model(batch)
+                    joints, feats_rst = model(batch)
 
                 # cal inference time
                 infer_time = time.time() - mld_time
@@ -191,6 +191,7 @@ def main():
                 # joints = upsample(joints, cfg.DATASET.KIT.FRAME_RATE, cfg.DEMO.FRAME_RATE)
                 nsample = len(joints)
                 id = 0
+                mov_paths = []
                 for i in range(nsample):
                     npypath = str(output_dir /
                                 f"{task}_{length[i]}_batch{id}_{i}.npy")
@@ -198,10 +199,21 @@ def main():
                         text_file.write(batch["text"][i])
                     np.save(npypath, joints[i].detach().cpu().numpy())
                     logger.info(f"Motions are generated here:\n{npypath}")
+                    
+                    from mld.data.humanml.utils.plot_script import plot_3d_motion
+                    fig_path = Path(str(npypath).replace(".npy",".mp4"))
+                    plot_3d_motion(fig_path, joints[i].detach().cpu().numpy(), title=batch["text"][i], fps=20)
+                    mov_paths.append(fig_path)
                 
                 if cfg.DEMO.OUTALL:
                     rep_lst.append(joints)
                     texts_lst.append(batch["text"])
+                    
+                # combine
+                from moviepy.editor import VideoFileClip, clips_array
+                mov_list = [VideoFileClip(str(x)) for x in mov_paths]                
+                final_clip = clips_array([mov_list])
+                final_clip.write_videofile(str(output_dir / f"2D_all.mp4"), fps=20)
                     
                     
             if cfg.DEMO.OUTALL:
@@ -318,7 +330,7 @@ def main():
             f'Total time spent: {total_time:.2f} seconds (including model loading time and exporting time).'
         )
 
-    if cfg.DEMO.RENDER:
+    # if cfg.DEMO.RENDER:
         # plot with lines
         # from mld.data.humanml.utils.plot_script import plot_3d_motion
         # fig_path = Path(str(npypath).replace(".npy",".mp4"))
@@ -330,13 +342,13 @@ def main():
         #                  cfg_path="./configs/render_cx.yaml")
         # logger.info(f"Motions are rendered here:\n{figpath}")
 
-        from mld.utils.demo_utils import render_batch
+        # from mld.utils.demo_utils import render_batch
 
-        blenderpath = cfg.RENDER.BLENDER_PATH
-        render_batch(os.path.dirname(npypath),
-                     execute_python=blenderpath,
-                     mode="sequence")  # sequence
-        logger.info(f"Motions are rendered here:\n{os.path.dirname(npypath)}")
+        # blenderpath = cfg.RENDER.BLENDER_PATH
+        # render_batch(os.path.dirname(npypath),
+        #              execute_python=blenderpath,
+        #              mode="sequence")  # sequence
+        # logger.info(f"Motions are rendered here:\n{os.path.dirname(npypath)}")
 
 
 if __name__ == "__main__":

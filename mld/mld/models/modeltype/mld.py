@@ -228,8 +228,6 @@ class MLD(BaseModel):
                 elif self.condition == 'text_uncond':
                     uncond_tokens.extend(uncond_tokens)
                 texts = uncond_tokens
-                print(texts)
-                exit()
             text_emb = self.text_encoder(texts)
             z = self._diffusion_reverse(text_emb, lengths)
         elif self.stage in ['vae']:
@@ -264,7 +262,7 @@ class MLD(BaseModel):
                         f.write(str(line))
                         f.write('\n')
         joints = self.feats2joints(feats_rst.detach().cpu())
-        return remove_padding(joints, lengths)
+        return remove_padding(joints, lengths), feats_rst
 
     def gen_from_latent(self, batch):
         z = batch["latent"]

@@ -45,10 +45,10 @@ class HumanML3DDataModule(BASEDataModule):
         return recover_from_ric(features, self.njoints)
 
     def joints2feats(self, features):
-        features = process_file(features, self.njoints)[0]
-        # mean = torch.tensor(self.hparams.mean).to(features)
-        # std = torch.tensor(self.hparams.std).to(features)
-        # features = (features - mean) / std
+        # features = process_file(features, self.njoints)[0]
+        mean = torch.tensor(self.hparams.mean).to(features)
+        std = torch.tensor(self.hparams.std).to(features)
+        features = (features - mean) / std
         return features
 
     def renorm4t2m(self, features):
