@@ -133,6 +133,7 @@ def render_cli() -> None:
             gt=cfg.RENDER.GT,
             accelerator=cfg.ACCELERATOR,
             device=cfg.DEVICE,
+            alpha=cfg.RENDER.ALPHA,
         )
 
         init = False

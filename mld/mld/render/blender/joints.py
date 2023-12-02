@@ -29,6 +29,16 @@ JOINTS_MATS = [
     colored_material(0.3, 0.3, 0.3, saturation_factor=sat_factor),
 ]
 
+def get_alpha_joints_mat(alpha):
+    return [
+            colored_material(0.3500, 0.0357, 0.0349, a=alpha, saturation_factor=sat_factor),
+            colored_material(0.6500, 0.175,  0.0043, a=alpha, saturation_factor=sat_factor),
+            colored_material(0.0349, 0.3500, 0.0349, a=alpha, saturation_factor=sat_factor),
+            colored_material(0.018,  0.059,  0.600,  a=alpha, saturation_factor=sat_factor),
+            colored_material(0.032,  0.325,  0.421,  a=alpha, saturation_factor=sat_factor),
+            colored_material(0.3,    0.3,    0.3,    a=alpha, saturation_factor=sat_factor),
+           ]
+
 
 class Joints:
 
@@ -39,6 +49,7 @@ class Joints:
                  canonicalize,
                  always_on_floor,
                  jointstype="mmm",
+                 alpha=1.0,
                  **kwargs):
         data = prepare_joints(
             data,
@@ -63,7 +74,7 @@ class Joints:
             self.kinematic_tree = humanml3d_kinematic_tree
             self.joints = humanml3d_joints
 
-        self.mat = JOINTS_MATS
+        self.mat = get_alpha_joints_mat(alpha)
 
     def get_sequence_mat(self, frac):
         return self.mat

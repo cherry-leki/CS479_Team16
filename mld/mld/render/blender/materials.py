@@ -25,6 +25,7 @@ def colored_material_relection_BSDF(r, g, b, a=1, roughness=0.127451, saturation
     materials = bpy.data.materials
     material = materials.new(name="body")
     material.use_nodes = True
+    material.blend_method = 'HASHED'
     # clear_material(material)
     nodes = material.node_tree.nodes
     links = material.node_tree.links
@@ -33,6 +34,7 @@ def colored_material_relection_BSDF(r, g, b, a=1, roughness=0.127451, saturation
     diffuse = nodes["Principled BSDF"]
     diffuse.inputs["Base Color"].default_value = (r*saturation_factor, g*saturation_factor, b*saturation_factor, a)
     diffuse.inputs["Roughness"].default_value = roughness
+    diffuse.inputs["Alpha"].default_value = a
     links.new(diffuse.outputs['BSDF'], output.inputs['Surface'])
     return material
 

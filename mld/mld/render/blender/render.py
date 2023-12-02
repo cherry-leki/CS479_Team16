@@ -30,7 +30,7 @@ def render(npydata, frames_folder, *, mode, faces_path, gt=False,
            exact_frame=None, num=8, downsample=True,
            canonicalize=True, always_on_floor=False, denoising=True,
            oldrender=True,jointstype="mmm", res="high", init=True,
-           accelerator='gpu',device=[0]):
+           accelerator='gpu',device=[0],alpha=False):
     if init:
         # Setup the scene (lights / render engine / resolution etc)
         setup_scene(res=res, denoising=denoising, oldrender=oldrender,accelerator=accelerator,device=device)
@@ -100,10 +100,16 @@ def render(npydata, frames_folder, *, mode, faces_path, gt=False,
         camera.update(data.get_mean_root())
 
     imported_obj_names = []
+    alphas = np.linspace(0.3, 0.6, nframes_to_render-1)
+    alphas = np.append(alphas, 1.0)
     for index, frameidx in enumerate(frameidx):
         if mode == "sequence":
-            frac = index / (nframes_to_render-1)
-            mat = data.get_sequence_mat(frac)
+            if alpha == True:
+                from .joints import get_alpha_joints_mat
+                mat = get_alpha_joints_mat(alphas[index])
+            else:
+                frac = index / (nframes_to_render-1)
+                mat = data.get_sequence_mat(frac)
         else:
             mat = data.mat
             camera.update(data.get_root(frameidx))
