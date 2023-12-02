@@ -23,7 +23,8 @@ def create_logger(cfg, phase='train'):
 
     time_str = time.strftime('%Y-%m-%d-%H-%M-%S')
 
-    new_dir(cfg, phase, time_str, final_output_dir)
+    cfg.TIME = str(time_str)
+    # new_dir(cfg, phase, time_str, final_output_dir)
 
     head = '%(asctime)-15s %(message)s'
     logger = config_logger(final_output_dir, time_str, phase, head)
@@ -38,17 +39,17 @@ def create_logger(cfg, phase='train'):
 def config_logger(final_output_dir, time_str, phase, head):
     log_file = '{}_{}_{}.log'.format('log', time_str, phase)
     final_log_file = final_output_dir / log_file
-    logging.basicConfig(filename=str(final_log_file))
+    # logging.basicConfig(filename=str(final_log_file))
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     console = logging.StreamHandler()
     formatter = logging.Formatter(head)
     console.setFormatter(formatter)
     logging.getLogger('').addHandler(console)
-    file_handler = logging.FileHandler(final_log_file, 'w')
-    file_handler.setFormatter(logging.Formatter(head))
-    file_handler.setLevel(logging.INFO)
-    logging.getLogger('').addHandler(file_handler)
+    # file_handler = logging.FileHandler(final_log_file, 'w')
+    # file_handler.setFormatter(logging.Formatter(head))
+    # file_handler.setLevel(logging.INFO)
+    # logging.getLogger('').addHandler(file_handler)
     return logger
 
 
