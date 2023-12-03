@@ -2,9 +2,32 @@
 Text-guided Motion Editing with Inversion Technique
 
 
-# Dataset
-Except for this github codes, three types of data is needed: checkpoints, deps and datasets
-To set up these dataset and environment, plase refer to MLD's public github (the link is below)
+# Set-up
+Our model is based on MLD, so please follow the public MLD GitHub's instructions <b>Quick Start</b>. \
+https://github.com/ChenFengYe/motion-latent-diffusion
+
+We provide two ways to prepare input motion samples.
+* Sample set and training set provided by HumanML3D
+* Input motion created in MLD through input text prompt
+
+Choosing which input method to use and setting the edited text prompt can be done at ```line 110``` of ```mld/control_demo.py```.
+<pre>
+  <code>
+    * input_motion_info -> the method of how to prepare input motion data
+    * input_text        -> the input text prompt related to the input motion data
+    * input_mo_len      -> the length of generated motion
+    * convert_text_list -> the list of edited text prompts
+  </code>
+</pre>
+
+
+After setting up the HumanML3D dataset and MLD environment, run the code with the following command.
+
+<pre>
+  <code>
+  python control_demo.py --cfg ./configs/config_mld_humanml3d.yaml --cfg_assets ./configs/assets.yaml
+  </code>
+</pre>
 
 
 
