@@ -2,6 +2,11 @@
 Text-guided Motion Editing with Inversion Technique
 
 
+# Dataset
+Except for this github codes, three types of data is needed: checkpoints, deps and datasets
+To set up these dataset and environment, plase refer to MLD's public github (the link is below)
+
+
 
 # Baseline codes
 Our code is implemented based on belows.
