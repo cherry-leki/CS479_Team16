@@ -135,19 +135,21 @@ def main():
         #     writer = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC, delimiter=',')
         #     writer.writerows(export_data)
         # * from train set
-        input_motion_info = dataset.train_dataset[149]
+        input_motion_info = dataset.train_dataset[10644]
         labels = ["word_emb", "pos_onehot", "caption", "joint_len", "motion", "motion_len", "tokens"]
         input_motion_info = dict(zip(labels, input_motion_info))
         
-        input_motion  = input_motion_info["motion"]
-        input_text    = "a person takes a small step forward"
+        input_motion  = input_motion_info["motion"][:70]
+        input_text    = "a man is standing"
         input_mo_len  = input_motion.shape[0]
         
-        convert_text_list = ["a person takes a small step backward",
-			"a person takes a big step forward",
-			"a person takes a small step to the right",
-			"a person takes a small step to the left",
-            "a person takes a small step to the diagonal"]
+        convert_text_list = [
+                            "a man is standing while throwing a ball",
+                            "a man is standing while waving his left hand",
+                            "a man is standing while bending forward",
+                            "a man is standing while lifting his right leg",
+                            "a man is standing while kicking his left leg"
+                            ]
         
     elif sample_from == sample_from_list[2]:    
         # * generate sample with custom text prompt
