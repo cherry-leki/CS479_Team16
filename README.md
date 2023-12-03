@@ -10,7 +10,7 @@ We provide two ways to prepare input motion samples.
 * Sample set and training set provided by HumanML3D
 * Input motion created in MLD through input text prompt
 
-Choosing which input method to use and setting the edited text prompt can be done at ```line 110``` of ```mld/control_demo.py```.
+Choosing which input method to use and setting the edited text prompt can be done from ```line 110``` of ```mld/control_demo.py```.
 <pre>
   <code>
     * input_motion_info -> the method of how to prepare input motion data
